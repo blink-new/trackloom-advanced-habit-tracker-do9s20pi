@@ -84,7 +84,7 @@ const AISuggestions: React.FC<AISuggestionsProps> = ({ onNavigate }) => {
 
   const loadSuggestions = useCallback(async () => {
     try {
-      // In a real app, you'd use AI to generate personalized suggestions
+      // Load default suggestions
       setSuggestions(mockSuggestions)
     } catch (error) {
       console.error('Error loading suggestions:', error)
@@ -161,16 +161,18 @@ const AISuggestions: React.FC<AISuggestionsProps> = ({ onNavigate }) => {
         emoji: suggestion.emoji,
         category: suggestion.category,
         frequency: 'daily',
-        reminder_time: '09:00',
+        reminderTime: '09:00',
         notes: suggestion.description,
         streak: 0,
-        completed_today: "0",
-        user_id: user.id,
-        created_at: new Date().toISOString()
+        completedToday: "0",
+        userId: user.id,
+        createdAt: new Date().toISOString()
       })
 
-      // Show success feedback (in a real app, you might show a toast notification)
+      // Show success feedback and navigate to dashboard
       alert(`Added "${suggestion.title}" to your habits!`)
+      // Optionally navigate back to dashboard to see the new habit
+      // onNavigate('dashboard')
     } catch (error) {
       console.error('Error adding habit:', error)
       alert('Failed to add habit. Please try again.')
